@@ -1,0 +1,9 @@
+public class AnimalFutureClass {
+ @future
+    public static void FutureMethod(String animalName){
+        Animal__c animals = new Animal__c(Name = animalName);
+        System.debug(animals + 'after insert');
+        insert animals;
+        System.debug(animals + 'before insert');
+    }
+}
