@@ -1,0 +1,15 @@
+public class AnimalHandler {
+	List<Animal__c> newList = new List<Animal__c>();
+    
+    public AnimalHandler(List<Animal__c> newList) {
+        this.newList = newList;
+    }
+    
+    public void afterInsert() {
+        List<Integer> externalId = new List<Integer>();
+        for (Animal__c animal : newList) {
+            externalId.add(animal.ExternalId__c.intValue());
+        }
+        AnimalFutureClass.animalRESTCallout(externalId);
+    }
+}

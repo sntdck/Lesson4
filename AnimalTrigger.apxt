@@ -1,11 +1,8 @@
-trigger AnimalTrigger on Animal__c (before insert) {
-    if(Trigger.isBefore){
-        List<Animal> animal= new List<Animal>();
-        Set<Integer> externalId = new Set<Integer>();
-        for(Animal animals : animal){
-            externalId.add(animals.Id__c);
+trigger AnimalTrigger on Animal__c (after insert) {
+    AnimalHandler handler = new AnimalHandler(Trigger.new);
+    if (Trigger.isAfter) {
+        if (Trigger.isInsert) {
+            handler.afterInsert();
         }
-        
-        List<Animal> anima = [Select Id, Name, Eats, Says From Animal Where Id In: externalId];
     }
 }
